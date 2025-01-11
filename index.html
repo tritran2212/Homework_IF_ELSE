@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Đọc thêm tài liệu trung tâm cung cấp</h1>
+
+        <h2>1. Viết một chương trình yêu cầu người dùng nhập
+            một số và kiểm tra xem số đó có phải là số dương
+            hay không. Nếu là số dương, in ra thông báo "Số
+            dương".
+        </h2>
+        <h2>Kiểm tra số dương, âm hoặc không dương không âm</h2>
+        <input id="soDuong" placeholder="Vui lòng nhập số">
+        <button id="Check">Kiểm tra</button>
+        <p>KẾT QUẢ: <span id="ketQua"></span></p>
+
+        <h2>2. Cho tuổi của một học sinh, kiểm tra xem học
+            sinh đó có đủ tuổi để vào lớp 1 hay không (tuổi
+            từ 6 trở lên). Nếu đủ tuổi, in ra "Đủ tuổi vào
+            lớp 1".
+        </h2>
+        <input id="Age" placeholder="Vui lòng nhập tuổi ">
+        <button id="CheckAge">Kiểm tra </button>
+        <p>KẾT QUẢ : <span id="ketQuaAge"></span></p>
+
+        <h2>3. Viết một chương trình yêu cầu người dùng nhập
+            tuổi của họ và kiểm tra xem họ có đủ tuổi để lái
+            xe không (giả sử tuổi tối thiểu là 16). Nếu đủ
+            tạo một thông báo bạn đủ tuổi lái xe còn không
+            thông báo bạn chưa đủ tuổi
+        </h2>
+        <input id="AgeDriver" placeholder="Vui lòng nhập tuổi ">
+        <button id="CheckAgeDriver">Kiểm tra tuổi </button>
+        <p>KẾT QUẢ : <span id="ketQuaAgeDriver"></span></p>
+
+        <h2>5. Viết một chương trình để xét thưởng cho nhân
+            viên. Nếu nhân viên đạt mục tiêu bán hàng trên
+            100 sản phẩm, thưởng 10% tổng doanh số. Nếu
+            không, không có thưởng.
+        </h2>
+        <h2>Gía 1 sản phầm 50.000đ</h2>
+        <h2>Thưởng:(Nếu sản bán >=100)*giá*10%</h2>
+        <input placeholder="Nhập SP bán của NV" id="sanPham">
+        <button id="xuli">Tính Tiền thưởng </button>
+        <p id="Give"></p>
+
+        <h2>6. Viết một chương trình để tính chiết khấu cho
+            khách hàng dựa trên số tiền mua hàng. Nếu số
+            tiền mua hàng trên 500 đô, khách hàng sẽ được
+            giảm 20%, nếu không thì không giảm.
+        </h2>
+        <h2>Tính chiết khấu cho khách hàng</h2>
+        <input placeholder="Nhập tiền phải thanh toán " id="Thanhtoan">USD
+        <button id="tinh">Tính Chiết Khấu</button>
+        <p> Chiết khấu : <span id="chietkhau"></span>$</p>
+
+        <h2>7.Viết một chương trình nhập vào tháng và in ra
+            mùa xuân hạ thu đông. Có kiểm tra dữ liệu người
+            dùng nhập vào có hợp lệ hay không, 1 <=tháng <=
+            12. Sử dụng switch case
+        </h2>
+        <input placeholder="Nhập tháng 1->12" id="thang">
+        <button id="CheckMonth">Print Season</button>
+        <p><span id="mua"></span></p>
+
+        <h2>Viết chương trình select option chọn chế độ
+            lái xe.
+            Với các chế độ: normal, eco, sport. Người dùng
+            chọn chế độ nào thì in ra chế độ đó, nếu người
+            dùng không chọn thì yêu cầu người dùng nhập vào.
+        </h2>
+        <select id="select" onchange="handChange()">
+            <option value="">Type</option>
+            <option value="normal">Normal</option>
+            <option value="eco">Eco</option>
+            <option value="sport">Sport</option>
+            </select>
+            <p>Bạn đang chọn: <span id="kq-1"></span></p>
+
+
+        <script src="./index.js"></script>
+    </body>
+</html>
