@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính Tiền Cáp</title>
+    <style>
+        body 
+        {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container 
+        {
+            max-width:600px;
+            margin: auto;
+        }
+
+        label 
+        {
+            display:block;
+            margin:10px 0 5px;
+        }
+        input, select, button {
+            width:100%;
+            padding:10px;
+            margin-bottom:15px;
+            border:1px solid #ccc;
+            border-radius:5px;
+        }
+        .result {
+            margin-top:20px;
+            padding:10px;
+            border:1px solid #ccc;
+            border-radius: 5px;
+            background-color:#f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tính Tiền Cáp</h1>
+        <form id="cableForm">
+            <label for="customerId">Mã khách hàng:</label>
+            <input type="text" id="customerId" required>
+            <label for="customerType">Loại khách hàng:</label>
+            <select id="customerType" onchange="toggleConnections()" required>
+                <option value="residential">Nhà dân</option>
+                <option value="business">Doanh nghiệp</option>
+            </select>
+            <label for="connections">Số kết nối:</label>
+            <input type="number" id="connections" value="0" disabled>
+
+            <label for="premiumChannels">Số kênh cao cấp:</label>
+            <input type="number" id="premiumChannels" required>
+            <button type="button" onclick="calculateCableBill()">Tính Tiền</button>
+        </form>
+        <div id="result" class="result" style="display: none;"></div>
+    </div>
+    <script>
+        function toggleConnections() {
+            const customerType = document.getElementById('customerType').value;
+            const connectionsInput = document.getElementById('connections');
+            if (customerType === 'business'){
+                connectionsInput.disabled = false;
+            }
+            else{
+                connectionsInput.disabled = true;
+                connectionsInput.value = 0;
+            }
+        }
+        function calculateCableBill() {
+            const customerId =document.getElementById('customerId').value;
+            const customerType =document.getElementById('customerType').value;
+            const connections =parseInt(document.getElementById('connections').value) || 0;
+            const premiumChannels =parseInt(document.getElementById('premiumChannels').value);
+
+            if (premiumChannels < 0 || connections< 0) {
+                alert('Vui lòng nhập số hợp lệ.');
+                return;
+            }
+            let totalCost =0;
+            if (customerType==='residential'){
+                totalCost = 4.5 + 20.5 + premiumChannels * 7.5;
+            } else if (customerType ==='business'){
+                totalCost = 15+75;
+                if (connections>10){
+                    totalCost += (connections - 10)*5;
+                }
+                totalCost += premiumChannels * 50;
+            }
+            const resultDv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = `Mã khách hàng: ${customerId}\nLoại khách hàng: ${customerType ==='residential' ?'Nhà dân' : 'Doanh nghiệp'}\nTổng số tiền phải trả: $${totalCost.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

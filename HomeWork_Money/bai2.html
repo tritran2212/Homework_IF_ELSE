@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính Tiền Điện</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin:20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        label{
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, button{
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .result{
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tính Tiền Điện</h1>
+        <form id="electricityForm">
+            <label for="name">Tên khách hàng:</label>
+            <input type="text" id="name" required>
+            <label for="electricityUsage">Số Kw tiêu thụ:</label>
+            <input type="number" id="electricityUsage" required>
+            <button type="button" onclick="calculateElectricityBill()">Tính Tiền</button>
+        </form>
+
+        <div id="result" class="result" style="display: none;"></div>
+    </div>
+    <script>
+        function calculateElectricityBill() {
+            const name=document.getElementById('name').value;
+            const electricityUsage=parseFloat(document.getElementById('electricityUsage').value);
+            if (electricityUsage <= 0 || isNaN(electricityUsage)) {
+                alert('Vui lòng nhập số Kw tiêu thụ hợp lệ.');
+                return;
+            }
+            let totalCost = 0;
+            if (electricityUsage <= 50){
+                totalCost = electricityUsage*500;
+            } 
+            else if (electricityUsage <= 100){
+                totalCost =50*500+(electricityUsage- 50) *650;
+            } 
+            else if (electricityUsage <= 200){
+                totalCost =50 * 500 + 50 * 650 +(electricityUsage - 100)* 850;
+            } 
+            else if (electricityUsage <= 350){
+                totalCost =50*500+50*650+100*850+(electricityUsage-200)*1100;
+            } 
+            else {
+                totalCost =50*500+50*650+100*850+150*1100+(electricityUsage - 350)*1300;
+            }
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = `Khách hàng: ${name}\nSố tiền phải trả: ${totalCost.toLocaleString('vi-VN')} VND`;
+        }
+    </script>
+</body>
+</html>

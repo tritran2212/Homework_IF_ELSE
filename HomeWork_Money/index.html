@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Tuyển Sinh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quản Lý Tuyển Sinh</h1>
+        <form id="admissionForm">
+            <label for="score1">Điểm môn 1:</label>
+            <input type="number" id="score1" required>
+
+            <label for="score2">Điểm môn 2:</label>
+            <input type="number" id="score2" required>
+
+            <label for="score3">Điểm môn 3:</label>
+            <input type="number" id="score3" required>
+
+            <label for="region">Khu vực:</label>
+            <select id="region" required>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="X">Khác</option>
+            </select>
+
+            <label for="priority">Đối tượng ưu tiên:</label>
+            <select id="priority" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="0">Khác</option>
+            </select>
+
+            <label for="benchmark">Điểm chuẩn:</label>
+            <input type="number" id="benchmark" required>
+            <button type="button" onclick="calculateResult()">Xác Nhận</button>
+        </form>
+        <div id="result" class="result" style="display: none;"></div>
+    </div>
+    <script>
+        function calculateResult() {
+            const score1 = parseFloat(document.getElementById('score1').value);
+            const score2 = parseFloat(document.getElementById('score2').value);
+            const score3 = parseFloat(document.getElementById('score3').value);
+            const region = document.getElementById('region').value;
+            const priority = parseInt(document.getElementById('priority').value);
+            const benchmark = parseFloat(document.getElementById('benchmark').value);
+            const regionBonus = region === 'A' ? 2 : region === 'B' ? 1 : region === 'C' ? 0.5 : 0;
+            const priorityBonus = priority === 1 ? 2.5 : priority === 2 ? 1.5 : priority === 3 ? 1 : 0;
+            const totalScore = score1 + score2 + score3 + regionBonus + priorityBonus;
+            let resultMessage = `Tổng điểm: ${totalScore}. `;
+            if (score1 === 0 || score2 === 0 || score3 === 0) {
+                resultMessage += 'Rớt (có môn điểm 0).';
+            } else if (totalScore >= benchmark) {
+                resultMessage += 'Đậu!';
+            } else {
+                resultMessage += 'Rớt.';
+            }
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = resultMessage;
+        }
+    </script>
+</body>
+</html>

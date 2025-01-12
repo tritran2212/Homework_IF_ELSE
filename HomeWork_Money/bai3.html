@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính Thuế Thu Nhập Cá Nhân</title>
+    <style>
+        body 
+        {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container 
+        {
+            max-width: 600px;
+            margin: auto;
+        }
+        label 
+        {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, button 
+        {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .result 
+        {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tính Thuế Thu Nhập Cá Nhân</h1>
+        <form id="taxForm">
+            <label for="name">Họ và tên:</label>
+            <input type="text" id="name" required>
+
+
+
+            <label for="annualIncome">Tổng thu nhập năm (triệu):</label>
+            <input type="number" id="annualIncome" required>
+
+
+            <label for="dependents">Số người phụ thuộc:</label>
+            <input type="number" id="dependents" required>
+
+
+            <button type="button" onclick="calculateTax()">Tính Thuế</button>
+        </form>
+
+        <div id="result" class="result" style="display: none;"></div>
+    </div>
+    <script>
+        function calculateTax() {
+            const name = document.getElementById('name').value;
+            const annualIncome = parseFloat(document.getElementById('annualIncome').value);
+            const dependents = parseInt(document.getElementById('dependents').value);
+            if (annualIncome <= 0 || isNaN(annualIncome) || dependents < 0 || isNaN(dependents)){
+                alert('Vui lòng nhập thông tin hợp lệ.');
+                return;
+            }
+
+
+            const taxableIncome =annualIncome - 4 - dependents * 1.6;
+            let taxRate = 0;
+
+            if(taxableIncome <= 0){
+                taxRate=0;
+            } 
+
+            else if(taxableIncome<= 60){
+                
+                taxRate=0.05;
+            } 
+
+            else if(taxableIncome<= 120){
+                taxRate=0.10;
+            } 
+
+            else if(taxableIncome<= 210){
+                taxRate = 0.15;
+            } 
+
+            else if(taxableIncome<= 384){
+                taxRate = 0.20;
+            } 
+
+            else if(taxableIncome<= 624){
+                taxRate = 0.25;
+            }
+
+             else if(taxableIncome<= 960){
+                taxRate = 0.30;
+            } 
+            else {
+                taxRate = 0.35;
+            }
+
+
+            const tax = taxableIncome > 0 ?taxableIncome *taxRate : 0;
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = `Họ và tên: ${name}\nThu nhập chịu thuế: ${taxableIncome.toLocaleString('vi-VN')} triệu\nThuế suất: ${(taxRate * 100)}%\nSố thuế phải nộp: ${tax.toLocaleString('vi-VN')} triệu`;
+        }
+    </script>
+</body>
+</html>
